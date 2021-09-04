@@ -1,4 +1,4 @@
-import { Sumary } from "./Summary";
+import { Sumary } from "../Summary";
 
 import { Container } from "./styles";
 
