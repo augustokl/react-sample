@@ -4,6 +4,7 @@
  - Typescript
  - Context API
  - MirageJS
+ - styled-components
 
 ### Application
 
