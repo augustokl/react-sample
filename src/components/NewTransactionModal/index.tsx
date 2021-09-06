@@ -1,7 +1,8 @@
-import { FormEvent, useState, useContext } from 'react';
+import { FormEvent, useState } from 'react';
 import Modal from 'react-modal';
 
-import { TransactionsContext } from '../../TransactionsContext';
+import { useTransactionsContext } from '../../hooks/useTransactionsContext';
+import { useTransactionModalContext } from '../../hooks/useTransactionModalContext';
 
 import closeImg from '../../assets/close.svg'
 import incomeImg from '../../assets/income.svg'
@@ -9,13 +10,9 @@ import outcomeImg from '../../assets/outcome.svg'
 
 import { Container, TransactionTypeContainer, RadioBox } from './styles';
 
-interface NewTransactionModalProps {
-  isOpen: boolean;
-  onRequestClose: () => void;
-}
-
-export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModalProps) {
-  const { createTransaction } = useContext(TransactionsContext)
+export function NewTransactionModal() {
+  const { createTransaction } = useTransactionsContext()
+  const { isOpen, onRequestClose } = useTransactionModalContext()
 
   const [title, setTitle] = useState('')
   const [amount, setAmount] = useState(0)
@@ -41,14 +38,14 @@ export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModa
   }
 
   return (
-    <Modal 
-      isOpen={isOpen} 
+    <Modal
+      isOpen={isOpen}
       onRequestClose={onRequestClose}
-      overlayClassName="modal-overlay" 
+      overlayClassName="modal-overlay"
       className="modal-content"
     >
-      <button 
-        type="button" 
+      <button
+        type="button"
         onClick={onRequestClose}
         className="modal-close"
       >
@@ -56,13 +53,13 @@ export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModa
       </button>
       <Container onSubmit={handleCreateNewTransaction}>
         <h2>Create transaction</h2>
-        
+
         <input
           placeholder="Title"
           value={title}
           onChange={event => setTitle(event.target.value)}
         />
-        
+
         <input
           type="number"
           placeholder="Value"
@@ -94,7 +91,7 @@ export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModa
             </span>
           </RadioBox>
         </TransactionTypeContainer>
-        
+
         <input
           placeholder="Category"
           value={category}

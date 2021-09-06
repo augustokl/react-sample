@@ -1,12 +1,13 @@
+import { useTransactionModalContext } from '../../hooks/useTransactionModalContext';
+
 import logoImg from '../../assets/logo.svg'
 
 import { Container, Content } from './styles'
 
-interface HeaderProps {
-  onOpenNewTransactionModal: () => void;
-}
 
-export function Header({ onOpenNewTransactionModal }: HeaderProps) {
+
+export function Header() {
+  const { onOpenNewTransactionModal } = useTransactionModalContext()
   return (
     <Container>
       <Content>
